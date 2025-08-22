@@ -72,6 +72,9 @@ services:
       - --transport=sse
       # add any MCP servers you want to use
       - --servers=context7
+      - --catalog=/mcp-gateway-catalog.yaml
+    volumes:
+      - ./mcp-gateway-catalog.yaml:/mcp-gateway-catalog.yaml:ro
 # NOTE: Define models
 models:
   qwen2_5:
