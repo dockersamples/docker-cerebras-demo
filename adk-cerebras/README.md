@@ -1,7 +1,7 @@
 # DevDuck agents
 
 A multi-agent system for Go programming assistance built with Google Agent Development Kit (ADK). This
-project features a coordinating agent (DevDuck) that manages two specialized sub-agents (Bob and
+project features a coordinating agent (DevDuck) that manages two specialized sub-agents (Local Agent and
 Cerebras) for different programming tasks.
 
 ## Architecture
@@ -12,7 +12,7 @@ The system consists of three main agents orchestrated by Docker Compose, which p
 ### 🐙 Docker Compose Orchestration
 
 - **Central Role**: Docker Compose serves as the foundation for the entire multi-agent system
-- **Service Orchestration**: Manages the lifecycle of all three agents (DevDuck, Bob, and Cerebras)
+- **Service Orchestration**: Manages the lifecycle of all three agents (DevDuck, Local Agent, and Cerebras)
 - **Configuration Management**: Defines agent prompts, model configurations, and service dependencies
   directly in the compose file
 - **Network Coordination**: Establishes secure inter-agent communication channels
@@ -26,7 +26,7 @@ The system consists of three main agents orchestrated by Docker Compose, which p
 - **Model**: Qwen3 (unsloth/qwen3-gguf:4B-UD-Q4_K_XL)
 - **Capabilities**: Routes requests to appropriate sub-agents based on user needs
 
-### 👨‍💻 Bob Agent
+### 👨‍💻 Local Agent Agent
 
 - **Role**: General development tasks and project coordination
 - **Model**: Qwen2.5 (ai/qwen2.5:latest)
@@ -94,7 +94,7 @@ The agents can be accessed through the web interface or API endpoints.
 ```text
 Hello I'm Phil
 
-Bob generate a gloang hello world program
+Local Agent generate a gloang hello world program
 
 Add a human struct with a hello method
 
@@ -111,12 +111,12 @@ Can you generate the tests
 
 - **General requests**: Handled by DevDuck, who routes to appropriate sub-agents
 - **Specific agent requests**
-  + "I want to speak with Bob" → Routes to Bob agent
+  + "I want to speak with Local Agent" → Routes to Local Agent agent
   + "I want to speak with Cerebras" → Routes to Cerebras agent
 
 ## Tips
 
-If for any reason, you cannot go back from the Cerebras agent to the Bob agent, try this:
+If for any reason, you cannot go back from the Cerebras agent to the Local Agent agent, try this:
 
 ```text
 go back to devduck

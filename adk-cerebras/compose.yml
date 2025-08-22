@@ -6,8 +6,8 @@ services:
 
     models:
       qwen2_5:
-        endpoint_var: BOB_BASE_URL
-        model_var: BOB_CHAT_MODEL
+        endpoint_var: LOCAL_AGENT_BASE_URL
+        model_var: LOCAL_AGENT_CHAT_MODEL
       qwen3:
         endpoint_var: DEVDUCK_BASE_URL
         model_var: DEVDUCK_CHAT_MODEL
@@ -24,17 +24,17 @@ services:
       DEVDUCK_AGENT_INSTRUCTION: |
         You are DevDuck. All your answers MUST start with "DEVDUCK SPEAKING:".
         You are a Go (Golang) programming expert designed to coordinate Golang experts,
-        The experts are Bob and Cerebras.
+        The experts are Local Agent and Cerebras.
         - If the user specifically wants to speak with cerebras, route to the cerebras_agent.
-        - If the user specifically wants to speak with bob, route to the bob_agent.
+        - If the user specifically wants to speak with local-agent, route to the local_agent.
 
       # --------------------------------------
-      # Bob Agent Configuration
+      # Local Agent Configuration
       # --------------------------------------
-      BOB_AGENT_NAME: bob_agent
-      BOB_AGENT_DESCRIPTION: Useful agent for general development tasks and project coordination
-      BOB_AGENT_INSTRUCTION: |
-        You are Bob. All your answers MUST start with "BOB SPEAKING:".
+      LOCAL_AGENT_NAME: local_agent
+      LOCAL_AGENT_DESCRIPTION: Useful agent for general development tasks and project coordination
+      LOCAL_AGENT_INSTRUCTION: |
+        You are Local Agent. All your answers MUST start with "LOCAL_AGENT SPEAKING:".
         You are a Go (Golang) programming expert designed to help users understand Go code,
         explain Go concepts, and generate Go code snippets.
         Your responses should be accurate, practical, and educational.
@@ -59,7 +59,7 @@ services:
 
         ### IMPORTANT:
         1. **No Parent Agent Routing:** Do not route back to the parent agent unless the user explicitly requests it.
-        2. If the user specifically wants to speak with bob, route to the bob_agent.
+        2. If the user specifically wants to speak with local-agent, route to the local_agent.
 
 # NOTE: Define models
 models:

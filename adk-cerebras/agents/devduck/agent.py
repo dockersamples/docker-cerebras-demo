@@ -3,7 +3,7 @@ import os
 from google.adk.agents import Agent
 from google.adk.models.lite_llm import LiteLlm
 
-from .sub_agents import bob_agent, cerebras_agent
+from .sub_agents import local_agent, cerebras_agent
 
 root_agent = Agent(
     model=LiteLlm(
@@ -15,5 +15,5 @@ root_agent = Agent(
     name=os.environ.get("DEVDUCK_AGENT_NAME"),
     description=os.environ.get("DEVDUCK_AGENT_DESCRIPTION"),
     instruction=os.environ.get("DEVDUCK_AGENT_INSTRUCTION"),
-    sub_agents=[cerebras_agent, bob_agent],
+    sub_agents=[cerebras_agent, local_agent],
 )
