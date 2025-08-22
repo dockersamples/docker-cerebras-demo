@@ -15,6 +15,7 @@ services:
     ports:
       - 8000:8000
     environment:
+      MCPGATEWAY_ENDPOINT: http://mcp-gateway:8811/sse
       PORT: 8000
       # --------------------------------------
       # Parent Agent configuration
@@ -60,7 +61,17 @@ services:
         ### IMPORTANT:
         1. **No Parent Agent Routing:** Do not route back to the parent agent unless the user explicitly requests it.
         2. If the user specifically wants to speak with local-agent, route to the local_agent.
+    depends_on:
+      - mcp-gateway
 
+  mcp-gateway:
+    # mcp-gateway secures your MCP servers
+    image: docker/mcp-gateway:latest
+    use_api_socket: true
+    command:
+      - --transport=sse
+      # add any MCP servers you want to use
+      - --servers=context7
 # NOTE: Define models
 models:
   qwen2_5:
