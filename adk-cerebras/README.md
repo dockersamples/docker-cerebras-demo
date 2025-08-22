@@ -1,6 +1,6 @@
 # DevDuck agents
 
-A multi-agent system for Go programming assistance built with Google Agent Development Kit (ADK). This
+A multi-agent system for Node.js programming assistance built with Google Agent Development Kit (ADK). This
 project features a coordinating agent (DevDuck) that manages two specialized sub-agents (Local Agent and
 Cerebras) for different programming tasks.
 
@@ -30,19 +30,19 @@ The system consists of three main agents orchestrated by Docker Compose, which p
 
 - **Role**: General development tasks and project coordination
 - **Model**: Qwen2.5 (ai/qwen2.5:latest)
-- **Specialization**: Go programming expert for understanding code, explaining concepts, and generating code snippets
+- **Specialization**: Node.js programming expert for understanding code, explaining concepts, and generating code snippets
 
 ### 🧠 Cerebras Agent
 
 - **Role**: Advanced computational tasks and complex problem-solving
 - **Model**: Llama-4 Scout (llama-4-scout-17b-16e-instruct)
 - **Provider**: Cerebras API
-- **Specialization**: Go programming expert for complex problem-solving scenarios
+- **Specialization**: Node.js programming expert for complex problem-solving scenarios
 
 ## Features
 
 - **Multi-agent coordination**: Routing between specialized agents
-- **Go programming expertise**: All agents specialize in Go/Golang development
+- **Node.js programming expertise**: All agents specialize in Node.js development
 - **FastAPI web interface**: RESTful API with web interface support
 - **Docker containerization**: Easy deployment with Docker Compose
 - **Flexible model configuration**: Support for multiple LLM providers (local and cloud)
@@ -94,9 +94,9 @@ The agents can be accessed through the web interface or API endpoints.
 ```text
 Hello I'm Phil
 
-Local Agent generate a gloang hello world program
+Local Agent generate a Node.js hello world program
 
-Add a human struct with a hello method
+Add a Person class with a greet method
 
 Cerebras can you analyse and comment this code
 
