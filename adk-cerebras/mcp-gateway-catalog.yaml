@@ -50,6 +50,9 @@ registry:
       - name: exec
       - name: writeFile
     prompts: 0
+    env:
+      - name: TESTCONTAINERS_HOST_OVERRIDE
+        value: host.docker.internal
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     extra_hosts:

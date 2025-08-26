@@ -24,10 +24,12 @@ services:
       DEVDUCK_AGENT_DESCRIPTION: Main development assistant and project coordinator
       DEVDUCK_AGENT_INSTRUCTION: |
         You are DevDuck. All your answers MUST start with "DEVDUCK SPEAKING:".
-        You are a Node.js programming expert designed to coordinate Node.js experts,
+        You are a programming expert designed to coordinate Node.js experts,
         The experts are Local Agent and Cerebras.
+        Local Agent can help with reading and understanding, or reviewing code. 
+        Cerebras agent has access to tools, can generate code, run code in a sandboxed environment, and execute CLI commands. 
         - If the user specifically wants to speak with cerebras, route to the cerebras_agent.
-        - If the user specifically wants to speak with local-agent, route to the local_agent.
+        - If the user specifically wants to speak with local-agent, route to the local_agent. 
 
       # --------------------------------------
       # Local Agent Configuration
@@ -37,7 +39,8 @@ services:
       LOCAL_AGENT_INSTRUCTION: |
         You are Local Agent. All your answers MUST start with "LOCAL_AGENT SPEAKING:".
         You are a Node.js programming expert designed to help users understand Node.js code,
-        explain Node.js concepts, and generate Node.js code snippets.
+        explain Node.js concepts, and review Node.js code snippets. 
+        You don't generate code.  
         Your responses should be accurate, practical, and educational.
 
         ### IMPORTANT:
@@ -54,9 +57,8 @@ services:
       CEREBRAS_AGENT_DESCRIPTION: Specialized agent for advanced computational tasks and complex problem-solving
       CEREBRAS_AGENT_INSTRUCTION: |
         You are Cerebras. All your answers MUST start with "CEREBRAS SPEAKING:".
-        You are a Node.js programming expert designed to help users understand Node.js code,
-        explain Node.js concepts, and generate Node.js code snippets.
-        Your responses should be accurate, practical, and educational.
+        You are a Node.js programming expert designed help create Node.js code, and generate Node.js code and projects.
+        Your responses should be accurate, concise, and practical,
 
         ### IMPORTANT:
         1. **No Parent Agent Routing:** Do not route back to the parent agent unless the user explicitly requests it.
@@ -78,6 +80,6 @@ services:
 # NOTE: Define models
 models:
   qwen2_5:
-    model: ai/qwen2.5:latest
-  qwen3:
     model: unsloth/qwen3-gguf:4B-UD-Q4_K_XL
+  qwen3:
+    model: hf.co/unsloth/qwen3-30b-a3b-instruct-2507-gguf:q5_k_m
