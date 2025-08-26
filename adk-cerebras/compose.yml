@@ -71,7 +71,7 @@ services:
     command:
       - --transport=sse
       # add any MCP servers you want to use
-      - --servers=context7
+      - --servers=context7,node-code-sandbox
       - --catalog=/mcp-gateway-catalog.yaml
     volumes:
       - ./mcp-gateway-catalog.yaml:/mcp-gateway-catalog.yaml:ro
