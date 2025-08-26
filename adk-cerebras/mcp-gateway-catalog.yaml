@@ -53,10 +53,10 @@ registry:
     env:
       - name: TESTCONTAINERS_HOST_OVERRIDE
         value: host.docker.internal
-      - name: NPM_CACHE_DIR
-        value: /Users/shelajev/.nvm
-      - name: FILES_DIR
-        value: /Users/shelajev/ai-contrib/docker-cerebras-demo/adk-cerebras
+#      - name: NPM_CACHE_DIR
+#        value: /Users/shelajev/.nvm
+#      - name: FILES_DIR
+#        value: /Users/shelajev/ai-contrib/docker-cerebras-demo/adk-cerebras
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     extra_hosts:
