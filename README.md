@@ -1,68 +1,126 @@
-# Compose for Agents Demos
+# DevDuck agents
 
-## Prerequisites
+A multi-agent system for Node.js programming assistance built with Google Agent Development Kit (ADK). This
+project features a coordinating agent (DevDuck) that manages two specialized sub-agents (Local Agent and
+Cerebras) for different programming tasks.
 
-+ **[Docker Desktop] 4.43.0+ or [Docker Engine]** installed.
-+ **A laptop or workstation with a GPU** (e.g., a MacBook) for running open models locally. If you
+## Architecture
+
+The system consists of three main agents orchestrated by Docker Compose, which plays a
+**primordial role** in launching and coordinating all agent services:
+
+### 🐙 Docker Compose Orchestration
+
+- **Central Role**: Docker Compose serves as the foundation for the entire multi-agent system
+- **Service Orchestration**: Manages the lifecycle of all three agents (DevDuck, Local Agent, and Cerebras)
+- **Configuration Management**: Defines agent prompts, model configurations, and service dependencies
+  directly in the compose file
+- **Network Coordination**: Establishes secure inter-agent communication channels
+- **Environment Management**: Handles API keys, model parameters, and runtime configurations
+
+### Agent Components
+
+### 🦆 DevDuck (Main Agent)
+
+- **Role**: Main development assistant and project coordinator
+- **Model**: Qwen3 (unsloth/qwen3-gguf:4B-UD-Q4_K_XL)
+- **Capabilities**: Routes requests to appropriate sub-agents based on user needs
+
+### 👨‍💻 Local Agent Agent
+
+- **Role**: General development tasks and project coordination
+- **Model**: Qwen2.5 (ai/qwen2.5:latest)
+- **Specialization**: Node.js programming expert for understanding code, explaining concepts, and generating code snippets
+
+### 🧠 Cerebras Agent
+
+- **Role**: Advanced computational tasks and complex problem-solving
+- **Model**: Llama-4 Scout (llama-4-scout-17b-16e-instruct)
+- **Provider**: Cerebras API
+- **Specialization**: Node.js programming expert for complex problem-solving scenarios
+
+## Features
+
+- **Multi-agent coordination**: Routing between specialized agents
+- **Node.js programming expertise**: All agents specialize in Node.js development
+- **FastAPI web interface**: RESTful API with web interface support
+- **Docker containerization**: Easy deployment with Docker Compose
+- **Flexible model configuration**: Support for multiple LLM providers (local and cloud)
+
+## Quick Start
+
+### Prerequisites
+
+- **[Docker Desktop] 4.43.0+ or [Docker Engine]** installed.
+- **A laptop or workstation with a GPU** (e.g., a MacBook) for running open models locally. If you
   don't have a GPU, you can alternatively use **[Docker Offload]**.
-+ If you're using [Docker Engine] on Linux or [Docker Desktop] on Windows, ensure that the
+- If you're using [Docker Engine] on Linux or [Docker Desktop] on Windows, ensure that the
   [Docker Model Runner requirements] are met (specifically that GPU
   support is enabled) and the necessary drivers are installed.
-+ If you're using Docker Engine on Linux, ensure you have [Docker Compose] 2.38.1 or later installed.
+- If you're using Docker Engine on Linux, ensure you have [Docker Compose] 2.38.1 or later installed.
 
-## Demos
+### Configuration
 
-Each of these demos is self-contained and can be run either locally or using a cloud context. They
-are all configured using two steps.
+1. **You need a Cerebras API Key**: <https://cloud.cerebras.ai/>
+2. Create a `.env` file with the following content:
 
-1. change directory to the root of the demo project
-2. create a `.mcp.env` file from the `mcp.env.example` file (if it exists, otherwise the demo
-   doesn't need any secrets) and supply the required MCP tokens
-3. run `docker compose up --build`
+```env
+CEREBRAS_API_KEY=<your_cerebras_api_key>
+CEREBRAS_BASE_URL=https://api.cerebras.ai/v1
+CEREBRAS_CHAT_MODEL=llama-4-scout-17b-16e-instruct
+```
 
-### Using OpenAI models
+> look at the `.env.sample` file
 
-The demos support using OpenAI models instead of running models locally with Docker Model Runner. To use OpenAI:
+### ✋ All the prompts are defined in the 🐙 compose file
 
-1. Create a `secret.openai-api-key` file with your OpenAI API key:
+### Start the services
 
-    ```plaintext
-    sk-...
-    ```
+```bash
+docker compose up
+# if you updated the code, use --build
+```
 
-2. Start the project with the OpenAI configuration:
+The application will be available at [http://0.0.0.0:8000](http://0.0.0.0:8000)
 
-    ```sh
-    docker compose -f compose.yaml -f compose.openai.yaml up
-    ```
+### Usage
 
-# Compose for Agents Demos - Classification
+The agents can be accessed through the web interface or API endpoints.
 
-| Demo | Agent System | Models | MCPs | project | compose |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-| [A2A](https://github.com/a2a-agents/agent2agent) Multi-Agent Fact Checker | Multi-Agent | OpenAI | duckduckgo | [./a2a](./a2a) | [compose.yaml](./a2a/compose.yaml) |
-| [Agno](https://github.com/agno-agi/agno) agent that summarizes GitHub issues | Multi-Agent | qwen3(local) | github-official | [./agno](./agno) | [compose.yaml](./agno/compose.yaml) |
-| [Vercel AI-SDK](https://github.com/vercel/ai) Chat-UI for mixing MCPs and Model | Single Agent | llama3.2(local), qwen3(local) | wikipedia-mcp, brave, resend(email) | [./vercel](./vercel) | [compose.yaml](https://github.com/slimslenderslacks/scira-mcp-chat/blob/main/compose.yaml) |
-| [CrewAI](https://github.com/crewAIInc/crewAI) Marketing Strategy Agent | Multi-Agent | qwen3(local) | duckduckgo | [./crew-ai](./crew-ai) | [compose.yaml](https://github.com/docker/compose-agents-demo/blob/main/crew-ai/compose.yaml) |
-| [ADK](https://github.com/google/adk-python) Multi-Agent Fact Checker | Multi-Agent | gemma3-qat(local) | duckduckgo | [./adk](./adk) | [compose.yaml](./adk/compose.yaml) |
-| [ADK](https://github.com/google/adk-python) & [Cerebras](https://www.cerebras.ai/) Golang Experts | Multi-Agent | unsloth/qwen3-gguf:4B-UD-Q4_K_XL & ai/qwen2.5:latest (DMR local), llama-4-scout-17b-16e-instruct (Cerebras remote) |  | [./adk-cerebras](./adk-cerebras) | [compose.yml](./adk-cerebras/compose.yml) |
-| [LangGraph](https://github.com/langchain-ai/langgraph) SQL Agent | Single Agent | qwen3(local) | postgres | [./langgraph](./langgraph) | [compose.yaml](./langgraph/compose.yaml) |
-| [Embabel](https://github.com/embabel/embabel-agent) Travel Agent | Multi-Agent | qwen3, Claude3.7, llama3.2, jimclark106/all-minilm:23M-F16 | brave, github-official, wikipedia-mcp, weather, google-maps, airbnb | [./embabel](./embabel) | [compose.yaml](https://github.com/embabel/travel-planner-agent/blob/main/compose.yaml) and [compose.dmr.yaml](https://github.com/embabel/travel-planner-agent/blob/main/compose.dmr.yaml) |
-| [Spring AI](https://spring.io/projects/spring-ai) Brave Search | Single Agent | none | duckduckgo | [./spring-ai](./spring-ai) | [compose.yaml](./spring-ai/compose.yaml) |
-| [ADK](https://github.com/google/adk-python) Sock Store Agent | Multi-Agent | qwen3 | MongoDb, Brave, Curl,  | [./adk-sock-shop](./adk-sock-shop/) | [compose.yaml](./adk-sock-shop/compose.yaml) |
-| [Langchaingo](https://github.com/tmc/langchaingo) DuckDuckGo Search | Single Agent | gemma3 | duckduckgo | [./langchaingo](./langchaingo) | [compose.yaml](./langchaingo/compose.yaml) |
+> Activate Token Streaming
 
-## License
+**You can try this**:
 
-This repository is **dual-licensed** under the Apache License 2.0 or the MIT
-License. You may choose either license to govern your use of the contributions
-made by Docker in this repository.
+```text
+Hello I'm Phil
 
-> ℹ️ **Note:** Each example under may have its own `LICENSE` file.
-> These are provided to reflect any third-party licensing requirements that
-> apply to that specific example, and they must be respected accordingly.
+Local Agent generate a Node.js hello world program
 
-`SPDX-License-Identifier: Apache-2.0 OR MIT`
+Add a Person class with a greet method
+
+Cerebras can you analyse and comment this code
+
+Can you generate the tests
+```
+
+> ✋ For a public demo, stay simple, the above examples are working.
+
+**🎥 How to use the demo**: [https://youtu.be/WYB31bzfXnM](https://youtu.be/WYB31bzfXnM)
+
+#### Routing Requests
+
+- **General requests**: Handled by DevDuck, who routes to appropriate sub-agents
+- **Specific agent requests**
+  + "I want to speak with Local Agent" → Routes to Local Agent agent
+  + "I want to speak with Cerebras" → Routes to Cerebras agent
+
+## Tips
+
+If for any reason, you cannot go back from the Cerebras agent to the Local Agent agent, try this:
+
+```text
+go back to devduck
+```
 
 [Docker Compose]: https://github.com/docker/compose
 [Docker Desktop]: https://www.docker.com/products/docker-desktop/
