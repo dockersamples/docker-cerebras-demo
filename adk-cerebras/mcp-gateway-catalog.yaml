@@ -36,9 +36,9 @@ registry:
     title: Node.js Sandbox
     type: server
     longLived: true
-    privileged: true
+    privileged:
     dateAdded: "2025-05-05T20:08:35Z"
-    image: olegselajev241/node-sandbox@sha256:14d5cf4e8336d2f5616d0cbb95113b6473ccd98af981bfe79905ad6e2890b54f
+    image: olegselajev241/node-sandbox@sha256:44437d5b61b6f324d3bb10c222ac43df9a5b52df9b66d97a89f6e0f8d8899f67
     ref: ""
     readme: http://desktop.docker.com/mcp/catalog/v2/readme/node-code-sandbox.md
     toolsUrl: http://desktop.docker.com/mcp/catalog/v2/tools/node-code-sandbox.json
@@ -53,10 +53,6 @@ registry:
     env:
       - name: TESTCONTAINERS_HOST_OVERRIDE
         value: host.docker.internal
-#      - name: NPM_CACHE_DIR
-#        value: /Users/shelajev/.nvm
-#      - name: FILES_DIR
-#        value: /Users/shelajev/ai-contrib/docker-cerebras-demo/adk-cerebras
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     extra_hosts:
