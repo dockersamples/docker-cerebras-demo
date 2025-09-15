@@ -39,12 +39,6 @@ registry:
     privileged:
     dateAdded: "2025-05-05T20:08:35Z"
     image: olegselajev241/node-sandbox@sha256:44437d5b61b6f324d3bb10c222ac43df9a5b52df9b66d97a89f6e0f8d8899f67
-    ref: ""
-    readme: http://desktop.docker.com/mcp/catalog/v2/readme/node-code-sandbox.md
-    toolsUrl: http://desktop.docker.com/mcp/catalog/v2/tools/node-code-sandbox.json
-    source: https://github.com/alfonsograziano/node-code-sandbox-mcp/tree/master
-    upstream: https://github.com/alfonsograziano/node-code-sandbox-mcp
-    icon: https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/nodedotjs.svg
     tools:
       - name: initSandbox
       - name: exec
@@ -58,12 +52,3 @@ registry:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     resources: {}
-    metadata:
-      pulls: 19346
-      stars: 5
-      githubStars: 89
-      category: devops
-      tags:
-        - node-code-sandbox
-        - devops
-      owner: shelajev

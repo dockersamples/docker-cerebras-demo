@@ -80,6 +80,6 @@ services:
 # NOTE: Define models
 models:
   qwen2_5:
-    model: unsloth/qwen3-gguf:4B-UD-Q4_K_XL
+    model: hf.co/unsloth/qwen3-30b-a3b-instruct-2507-gguf:q5_k_m
   qwen3:
     model: hf.co/unsloth/qwen3-30b-a3b-instruct-2507-gguf:q5_k_m

@@ -5,3 +5,4 @@
 **/init-secrets.sh
 **/secret.openai-api-key
 a2a/secret.openai-api-key
+/.idea
