@@ -6,3 +6,4 @@
 **/secret.openai-api-key
 a2a/secret.openai-api-key
 /.idea
+/.env
