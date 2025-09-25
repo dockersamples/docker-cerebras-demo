@@ -5,10 +5,10 @@ services:
       dockerfile: Dockerfile
 
     models:
-      qwen2_5:
+      llama3:
         endpoint_var: LOCAL_AGENT_BASE_URL
         model_var: LOCAL_AGENT_CHAT_MODEL
-      qwen3:
+      mistral:
         endpoint_var: DEVDUCK_BASE_URL
         model_var: DEVDUCK_CHAT_MODEL
 
@@ -79,7 +79,7 @@ services:
       - ./mcp-gateway-catalog.yaml:/mcp-gateway-catalog.yaml:ro
 # NOTE: Define models
 models:
-  qwen2_5:
-    model: hf.co/unsloth/qwen3-30b-a3b-instruct-2507-gguf:q5_k_m
-  qwen3:
-    model: hf.co/unsloth/qwen3-30b-a3b-instruct-2507-gguf:q5_k_m
+  llama3:
+    model: ai/llama3.2:1B-Q8_0
+  mistral:
+    model: ai/mistral:7B-Q4_0
