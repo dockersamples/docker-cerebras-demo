@@ -3,7 +3,6 @@ services:
     build:
       context: ./agents
       dockerfile: Dockerfile
-
     models:
       llama3:
         endpoint_var: LOCAL_AGENT_BASE_URL
@@ -11,7 +10,6 @@ services:
       mistral:
         endpoint_var: DEVDUCK_BASE_URL
         model_var: DEVDUCK_CHAT_MODEL
-
     ports:
       - 8000:8000
     environment:
