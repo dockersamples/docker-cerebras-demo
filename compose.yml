@@ -5,10 +5,10 @@ services:
       dockerfile: Dockerfile
 
     models:
-      qwen2_5:
+      llama3:
         endpoint_var: LOCAL_AGENT_BASE_URL
         model_var: LOCAL_AGENT_CHAT_MODEL
-      qwen3:
+      mistral:
         endpoint_var: DEVDUCK_BASE_URL
         model_var: DEVDUCK_CHAT_MODEL
 
@@ -26,10 +26,10 @@ services:
         You are DevDuck. All your answers MUST start with "DEVDUCK SPEAKING:".
         You are a programming expert designed to coordinate Node.js experts,
         The experts are Local Agent and Cerebras.
-        Local Agent can help with reading and understanding, or reviewing code. 
-        Cerebras agent has access to tools, can generate code, run code in a sandboxed environment, and execute CLI commands. 
+        Local Agent can help with reading and understanding, or reviewing code.
+        Cerebras agent has access to tools, can generate code, run code in a sandboxed environment, and execute CLI commands.
         - If the user specifically wants to speak with cerebras, route to the cerebras_agent.
-        - If the user specifically wants to speak with local-agent, route to the local_agent. 
+        - If the user specifically wants to speak with local-agent, route to the local_agent.
 
       # --------------------------------------
       # Local Agent Configuration
@@ -39,8 +39,8 @@ services:
       LOCAL_AGENT_INSTRUCTION: |
         You are Local Agent. All your answers MUST start with "LOCAL_AGENT SPEAKING:".
         You are a Node.js programming expert designed to help users understand Node.js code,
-        explain Node.js concepts, and review Node.js code snippets. 
-        You don't generate code.  
+        explain Node.js concepts, and review Node.js code snippets.
+        You don't generate code.
         Your responses should be accurate, practical, and educational.
 
         ### IMPORTANT:
@@ -79,7 +79,7 @@ services:
       - ./mcp-gateway-catalog.yaml:/mcp-gateway-catalog.yaml:ro
 # NOTE: Define models
 models:
-  qwen2_5:
-    model: hf.co/unsloth/qwen3-30b-a3b-instruct-2507-gguf:q5_k_m
-  qwen3:
-    model: hf.co/unsloth/qwen3-30b-a3b-instruct-2507-gguf:q5_k_m
+  llama3:
+    model: ai/llama3.2:1B-Q8_0
+  mistral:
+    model: ai/mistral:7B-Q4_0
