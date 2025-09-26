@@ -3,11 +3,13 @@ services:
     build:
       context: ./agents
       dockerfile: Dockerfile
+    env_file:
+      - .env
     models:
-      llama3:
+      jan-nano:
         endpoint_var: LOCAL_AGENT_BASE_URL
         model_var: LOCAL_AGENT_CHAT_MODEL
-      mistral:
+      lucy:
         endpoint_var: DEVDUCK_BASE_URL
         model_var: DEVDUCK_CHAT_MODEL
     ports:
@@ -81,3 +83,7 @@ models:
     model: ai/llama3.2:1B-Q8_0
   mistral:
     model: ai/mistral:7B-Q4_0
+  jan-nano:
+    model: hf.co/menlo/jan-nano-gguf:q4_k_m
+  lucy:
+    model: hf.co/menlo/lucy-gguf:q8_0
